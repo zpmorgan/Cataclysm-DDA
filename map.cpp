@@ -577,7 +577,7 @@ void map::vehmove(game *g)
        timespec ts;   // Timespec for the animation
        ts.tv_sec = 0;
        ts.tv_nsec = 50000000;
-       nanosleep (&ts, 0);
+       //nanosleep (&ts, 0);
       }
 
       if (can_move) {
