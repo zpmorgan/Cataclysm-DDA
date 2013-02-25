@@ -855,7 +855,7 @@ int overmap::dist_from_city(point p)
  return distance;
 }
 
-void overmap::draw(WINDOW *w, game *g, int &cursx, int &cursy,
+void overmap::spew_overmaps_to_window(WINDOW *w, game *g, int &cursx, int &cursy,
                    int &origx, int &origy, char &ch, bool blink)
 {
  bool legend = true, note_here = false, npc_here = false;
@@ -864,7 +864,7 @@ void overmap::draw(WINDOW *w, game *g, int &cursx, int &cursy,
  int om_map_height = g->TERRAIN_WINDOW_HEIGHT;
 
  int omx, omy;
- overmap hori, vert, diag; // Adjacent maps
+ overmap *hori=this, *vert=this, *diag=this; // Adjacent maps, if any
  point target(-1, -1);
  if (g->u.active_mission >= 0 &&
      g->u.active_mission < g->u.active_missions.size())
@@ -876,30 +876,29 @@ void overmap::draw(WINDOW *w, game *g, int &cursx, int &cursy,
 /* First, determine if we're close enough to the edge to need to load an
  * adjacent overmap, and load it/them. */
   if (cursx < om_map_height / 2) {
-   hori = overmap(g, posx - 1, posy, posz);
+   hori = g->overmap_please(posx - 1, posy, posz);
    if (cursy < om_map_width / 2)
-    diag = overmap(g, posx - 1, posy - 1, posz);
+    diag = g->overmap_please(posx - 1, posy - 1, posz);
    if (cursy > OMAPY - 2 - (om_map_width / 2))
-    diag = overmap(g, posx - 1, posy + 1, posz);
+    diag = g->overmap_please(posx - 1, posy + 1, posz);
   }
   if (cursx > OMAPX - 2 - (om_map_height / 2)) {
-   hori = overmap(g, posx + 1, posy, posz);
+   hori = g->overmap_please(posx + 1, posy, posz);
    if (cursy < om_map_width / 2)
-    diag = overmap(g, posx + 1, posy - 1, posz);
+    diag = g->overmap_please(posx + 1, posy - 1, posz);
    if (cursy > OMAPY - 2 - (om_map_width / 2))
-    diag = overmap(g, posx + 1, posy + 1, posz);
+    diag = g->overmap_please(posx + 1, posy + 1, posz);
   }
   if (cursy < (om_map_width / 2))
-   vert = overmap(g, posx, posy - 1, posz);
+   vert = g->overmap_please(posx, posy - 1, posz);
   if (cursy > OMAPY - 2 - (om_map_width / 2))
-   vert = overmap(g, posx, posy + 1, posz);
+   vert = g->overmap_please(posx, posy + 1, posz);
 
 // Now actually draw the map
   bool csee = false;
   oter_id ccur_ter;
   for (int i = -(om_map_width / 2); i < (om_map_width / 2); i++) {
-    for (int j = -(om_map_height / 2);
-         j <= (om_map_height / 2) + (ch == 'j' ? 1 : 0); j++) {
+   for (int j = -(om_map_height / 2); j <= (om_map_height / 2) + (ch == 'j' ? 1 : 0); j++) {
     omx = cursx + i;
     omy = cursy + j;
     see = false;
@@ -924,42 +923,42 @@ void overmap::draw(WINDOW *w, game *g, int &cursx, int &cursy,
      omx += OMAPX;
      if (omy < 0 || omy >= OMAPY) {
       omy += (omy < 0 ? OMAPY : 0 - OMAPY);
-      cur_ter = diag.ter(omx, omy);
-      see = diag.seen(omx, omy);
-      if ((note_here = diag.has_note(omx, omy)))
-       note_text = diag.note(omx, omy);
+      cur_ter = diag->ter(omx, omy);
+      see = diag->seen(omx, omy);
+      if ((note_here = diag->has_note(omx, omy)))
+       note_text = diag->note(omx, omy);
      } else {
-      cur_ter = hori.ter(omx, omy);
-      see = hori.seen(omx, omy);
-      if (note_here = hori.has_note(omx, omy))
-       note_text = hori.note(omx, omy);
+      cur_ter = hori->ter(omx, omy);
+      see = hori->seen(omx, omy);
+      if (note_here = hori->has_note(omx, omy))
+       note_text = hori->note(omx, omy);
      }
     } else if (omx >= OMAPX) {
      omx -= OMAPX;
      if (omy < 0 || omy >= OMAPY) {
       omy += (omy < 0 ? OMAPY : 0 - OMAPY);
-      cur_ter = diag.ter(omx, omy);
-      see = diag.seen(omx, omy);
-      if (note_here = diag.has_note(omx, omy))
-       note_text = diag.note(omx, omy);
+      cur_ter = diag->ter(omx, omy);
+      see = diag->seen(omx, omy);
+      if (note_here = diag->has_note(omx, omy))
+       note_text = diag->note(omx, omy);
      } else {
-      cur_ter = hori.ter(omx, omy);
-      see = hori.seen(omx, omy);
-      if ((note_here = hori.has_note(omx, omy)))
-       note_text = hori.note(omx, omy);
+      cur_ter = hori->ter(omx, omy);
+      see = hori->seen(omx, omy);
+      if ((note_here = hori->has_note(omx, omy)))
+       note_text = hori->note(omx, omy);
      }
     } else if (omy < 0) {
      omy += OMAPY;
-     cur_ter = vert.ter(omx, omy);
-     see = vert.seen(omx, omy);
-     if ((note_here = vert.has_note(omx, omy)))
-      note_text = vert.note(omx, omy);
+     cur_ter = vert->ter(omx, omy);
+     see = vert->seen(omx, omy);
+     if ((note_here = vert->has_note(omx, omy)))
+      note_text = vert->note(omx, omy);
     } else if (omy >= OMAPY) {
      omy -= OMAPY;
-     cur_ter = vert.ter(omx, omy);
-     see = vert.seen(omx, omy);
-     if ((note_here = vert.has_note(omx, omy)))
-      note_text = vert.note(omx, omy);
+     cur_ter = vert->ter(omx, omy);
+     see = vert->seen(omx, omy);
+     if ((note_here = vert->has_note(omx, omy)))
+      note_text = vert->note(omx, omy);
     } else
      debugmsg("No data loaded! omx: %d omy: %d", omx, omy);
 // </Out of bounds replacement>
@@ -1077,7 +1076,7 @@ point overmap::choose_point(game *g)
  point ret(-1, -1);
 
  do {
-  draw(w_map, g, cursx, cursy, origx, origy, ch, blink);
+  spew_overmaps_to_window(w_map, g, cursx, cursy, origx, origy, ch, blink);
   ch = input();
   int dirx, diry;
   if (ch != ERR)
@@ -1119,7 +1118,7 @@ point overmap::choose_point(game *g)
    timeout(-1);
    std::string term = string_input_popup("Search term:");
    timeout(BLINK_SPEED);
-   draw(w_map, g, cursx, cursy, origx, origy, ch, blink);
+   spew_overmaps_to_window (w_map, g, cursx, cursy, origx, origy, ch, blink);
    point found = find_note(point(cursx, cursy), term);
    if (found.x == -1) {	// Didn't find a note
     std::vector<point> terlist;
@@ -1152,7 +1151,7 @@ point overmap::choose_point(game *g)
       }
       cursx = terlist[i].x;
       cursy = terlist[i].y;
-      draw(w_map, g, cursx, cursy, origx, origy, ch, blink);
+      spew_overmaps_to_window (w_map, g, cursx, cursy, origx, origy, ch, blink);
       wrefresh(w_search);
       timeout(BLINK_SPEED);
      } while(ch != '\n' && ch != ' ' && ch != 'q');
@@ -1184,7 +1183,12 @@ point overmap::choose_point(game *g)
  delwin(w_search);
  erase();
  g->refresh_all();
+ g->clear_overmap_please_cache();
  return ret;
+}
+
+tripoint overmap::pos_tripoint(){
+   return tripoint(posx,posy,posz);
 }
 
 void overmap::first_house(int &x, int &y)

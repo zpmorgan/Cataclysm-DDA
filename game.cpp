@@ -8487,3 +8487,30 @@ bottom of your window downward so you get an extra line.\n");
  delwin(tmp);
  erase();
 }
+
+// the overmap_please cache is serviced when the overmap is drawn in overmap::choose_point
+// it is wiped when choose_point is exited and the normal view returns.
+
+void game::clear_overmap_please_cache(){
+   overmap_please_cache.clear();
+}
+
+overmap* game::overmap_please(int x, int y, int z){
+   tripoint p(x,y,z);
+   if (overmap_please_cache.find(p) == overmap_please_cache.end()){ //point not found
+      // if om is loaded elsewhere, copy that to cache
+      // if not, then load normally & cache.
+      if(cur_om.pos_tripoint() == p)
+         overmap_please_cache[p] = cur_om;
+      else if(om_diag->pos_tripoint() == p)
+         overmap_please_cache[p] = *om_diag;
+      else if(om_hori->pos_tripoint() == p)
+         overmap_please_cache[p] = *om_hori;
+      else if(om_vert->pos_tripoint() == p)
+         overmap_please_cache[p] = *om_vert;
+      else
+         overmap_please_cache[p] = overmap(this, x,y,z);
+   }
+   return &(overmap_please_cache[p]);
+}
+

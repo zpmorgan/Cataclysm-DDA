@@ -203,6 +203,10 @@ class game
   void consume_items(std::vector<component> components);
   void consume_tools(std::vector<component> tools);
 
+  // overmap cache, just for drawing the things
+  overmap* overmap_please (int x,int y,int z);
+  void clear_overmap_please_cache();
+
   std::vector <itype*> itypes;
   std::vector <mtype*> mtypes;
   std::vector <vehicle*> vtypes;
@@ -391,8 +395,6 @@ class game
   void mondebug();        // Debug monster behavior directly
   void groupdebug();      // Get into on monster groups
 
-
-
 // ########################## DATA ################################
 
   signed char last_target;// The last monster targeted
@@ -421,6 +423,8 @@ class game
   calendar latest_lightlevel_turn;
 
   special_game *gamemode;
+
+  std::map<tripoint, overmap, pointcomp> overmap_please_cache;
 };
 
 #endif

@@ -53,6 +53,7 @@ class overmap
   void generate_sub(overmap* above);
   void make_tutorial();
   void first_house(int &x, int &y);
+  tripoint pos_tripoint();
 
   void process_mongroups(); // Makes them die out, maybe more
 
@@ -104,7 +105,7 @@ class overmap
   bool nullbool;
   std::vector<om_note> notes;
   //Drawing
-  void draw(WINDOW *w, game *g, int &cursx, int &cursy,
+  void spew_overmaps_to_window(WINDOW *w, game *g, int &cursx, int &cursy,
                    int &origx, int &origy, char &ch, bool blink);
   // Overall terrain
   void place_river(point pa, point pb);

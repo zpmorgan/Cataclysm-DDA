@@ -30,6 +30,22 @@ struct tripoint {
  tripoint(int X = 0, int Y = 0, int Z = 0) : x (X), y (Y), z (Z) {}
  tripoint(const tripoint &p) : x (p.x), y (p.y), z (p.z) {}
  ~tripoint(){}
+ bool operator==(const tripoint &rhs){ return x==rhs.x && y==rhs.y && z==rhs.z; }
 };
+
+struct pointcomp
+{
+ bool operator() (const tripoint &lhs, const tripoint &rhs) const
+ {
+  if (lhs.x < rhs.x) return true;
+  if (lhs.x > rhs.x) return false;
+  if (lhs.y < rhs.y) return true;
+  if (lhs.y > rhs.y) return false;
+  if (lhs.z < rhs.z) return true;
+  if (lhs.z > rhs.z) return false;
+  return false;
+ };
+};
+
 
 #endif
