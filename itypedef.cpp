@@ -3021,6 +3021,115 @@ A shotgun modified to use a revolver cylinder mechanism, it can hold\n\
 6 cartridges.",
 mfb(IF_RELOAD_ONE));
 
+
+GUN("Mauser C96 Red 9",     7,1100,c_dkgray, STEEL,   PLASTIC,
+// SKILL    AMMO  VOL WGT MDG HIT DMG ACC REC DUR BST CLIP
+   "pistol",   AT_9MM,  3,  10, 8,  1,  0,  25, 3,  7,  0,  10, 300, "\
+   Also known as the 'Broomhandle Pistol' or 'Box Cannon,' the Mauser C96 is\n\
+   a semi-automatic pistol with a distinctive internal box magazine placed\n\
+   in front of the trigger. The Red 9 9x19mm variant was developed during\n\
+   World War I to cope with shortages of the new Luger P08 pistol.",
+   0);
+
+GUN("Luger P08",      8,1000,c_dkgray, STEEL,   PLASTIC,
+// SKILL    AMMO  VOL WGT MDG HIT DMG ACC REC DUR BST CLIP
+   "pistol",   AT_9MM,  2,  8,  8,  1,  0,  24, 4,  7,  0,  8, 300, "\
+   An infamous pistol associated with Imperial and Nazi Germany of\n\
+   World War I and II, the Luger was a ground-breaking weapon developed\n\
+   hand-in-hand with the now-ubiquitous 9x19 parabellum round. Machined to\n\
+   exacting standards, the Luger is still highly prized even today.",
+   0);
+
+GUN("Mateba Autorevolver",  2,1560,c_dkgray, STEEL,   WOOD,
+// SKILL    AMMO  VOL WGT MDG HIT DMG ACC REC DUR BST CLIP
+   "pistol",   AT_44,    3, 12, 10,  1,  2, 22, 0,  8,  0,  6, 80, "\
+   One of the world's few truly semi-automatic revolvers, the Mateba\n\
+   Autorevolver uses a shot's recoil energy to automatically rotate the\n\
+   cylinder. The barrel's unusual alignment with the bottom of the cylinder\n\
+   better directs recoil into the shooter's hand, improving performance.",
+   mfb(IF_RELOAD_ONE));
+
+GUN("Calico Liberty III",      3,2000,c_dkgray, STEEL,   PLASTIC,
+// SKILL    AMMO  VOL WGT MDG HIT DMG ACC REC DUR BST CLIP
+   "pistol",   AT_9MM,  5,  9,  8,  1,  0,  16, 0,  6,  0,  50, 500, "\
+   The Calico Liberty III is an unusual pistol that looks like a prop for\n\
+   a science-fiction movie. The top-mounted helical magazine, a standard\n\
+   feature on all Calico weapons, can contain 50 or 100 rounds of 9x19\n\
+   ammunition and helps to negate the effects of recoil.",
+   0);
+
+GUN("Pancor Jackhammer",       2,2500,c_red, STEEL,   PLASTIC,
+// SKILL    AMMO  VOL WGT MDG HIT DMG ACC REC DUR BST CLIP
+   "shotgun",  AT_SHOT,20, 40, 19, 1,  0,  18, -4,  6,  5,  10, 500, "\
+   The Pancor Jackhammer is an automatic shotgun designed in the 1980s by\n\
+   John Anderson of the Pancor Corporation. Though Pancor went bankrupt in\n\
+   bureaucratic limbo from testing by the US Department of Defense, the\n\
+   Pancor Jackhammer has become a cultural icon in gun circles.",
+   mfb(IF_MODE_BURST));
+
+GUN("H&K CAWS",       2,2500,c_red, STEEL,   PLASTIC,
+// SKILL    AMMO  VOL WGT MDG HIT DMG ACC REC DUR BST CLIP
+   "shotgun",  AT_SHOT,18, 33, 17, 1,  0,  19, -2,  6,  5,  10, 500, "\
+   Designed for the United States' Close Assault Weapon System program,\n\
+   the H&K CAWS is a bullpup-style automatic shotgun fed by a box magazine.\n\
+   Though the program was eventually canceled, the CAWS eventually became\n\
+   popular with cuonterfeit gunsmiths in the mid 21st century.",
+   mfb(IF_MODE_BURST));
+
+GUN("Striker-12",     2,2000,c_red, STEEL,   PLASTIC,
+// SKILL    AMMO  VOL WGT MDG HIT DMG ACC REC DUR BST CLIP
+   "shotgun",  AT_SHOT,24, 37, 19, 0,  0,  19, 0,  4,  0,  12, 120, "\
+   A distinct weapon of African origin, the Striker-12 is a revolver shotgun\n\
+   with a 12-round capacity designed for anti-riot and combat duties. The\n\
+   high round capacity is offset by a number of flaws and shortcomings, such\n\
+   as slow reload speeds and a heavy, bulky frame.",
+   mfb(IF_RELOAD_ONE));
+
+GUN("Thompson SMG",  12,2000,c_cyan,   STEEL,   WOOD,
+//  SKILL       AMMO    VOL WGT MDG HIT DMG ACC REC DUR BST CLIP RELOAD
+   "smg",      AT_45,   17, 43, 11, 1,  0,  13, -3, 8,  5,  50,  500, "\
+   An infamous submachine gun developed in the early 20th century United\n\
+   States, the 'Tommy Gun' or 'Chicago Typewriter' is inseparable from\n\
+   Prohibition-era gangsters like 'Machine Gun Kelly' and John Dillinger\n\
+   and atrocities like the St. Valentine's Day Massacre.",
+   mfb(IF_MODE_BURST));
+
+GUN("M1 Garand",   5,3500,c_brown,STEEL,  WOOD,
+//  SKILL       AMMO    VOL WGT MDG HIT DMG ACC REC DUR BST CLIP RELOAD
+   "rifle", AT_3006,17, 38, 13, 2,  0,  6,  -5, 8,  0,  8,   500, "\
+   The first general-issue semi-automatic battle rifle in the world, the\n\
+   M1 Garand was the standard rifle used by United States military forces\n\
+   during World War II. The M1 is highly-sought by shooting enthusiasts\n\
+   and continues to be used for US military drills and ceremonies.",
+   0);
+
+GUN("RPK",      1,5000,c_brown,STEEL,  WOOD,
+//  SKILL       AMMO    VOL WGT MDG HIT DMG ACC REC DUR BST CLIP RELOAD
+   "rifle", AT_762,  32, 48, 22, -4, 0,  20, 6,  10, 15, 75,  500, "\
+   The RPK is a light machine gun developed and produced in the former\n\
+   Soviet Union. Designed by Mikhail Kalashnikov, the RPK shares many\n\
+   design characteristics with the AK-47, including great durability and\n\
+   popularity amongst criminals and terrorists.",
+   mfb(IF_MODE_BURST));
+
+GUN("HK21",     1,6500,c_brown,  STEEL,   PLASTIC,
+//  SKILL       AMMO    VOL WGT MDG HIT DMG ACC REC DUR BST CLIP RELOAD
+   "rifle", AT_308,  20, 70, 30, -4, 8,  20, -4, 8,  10, 50,  600, "\
+   The HK21 is a light machine gun developed and produced in West Germany\n\
+   in the 1960s. Based on the G3 rifle, the HK21 can also be configured to fire\n\
+   7.62x39 and 5.56x45 ammunition, though this particular gun did not come\n\
+   with the parts to do so.",
+   mfb(IF_MODE_BURST));
+
+GUN("M1918 BAR",   8,3500,c_brown,STEEL,  WOOD,
+//  SKILL       AMMO    VOL WGT MDG HIT DMG ACC REC DUR BST CLIP RELOAD
+   "rifle", AT_3006,38, 64, 12, 3,  -3, 6,  -4, 8,  5,  20,  100, "\
+   The Browning Automatic Rifle is a deadly machine gun developed to\n\
+   modernize the dilapidated armory of the United States military.\n\
+   Firing the powerful .30-06 round, the BAR served in many conflicts\n\
+   around the world and was the gun of choice for Bonnie & Clyde.",
+   mfb(IF_MODE_BURST));
+
 // GUN MODS
 // Accuracy is inverted from guns; high values are a bonus, low values a penalty
 // The clip modification is a percentage of the original clip size.
@@ -3238,6 +3347,54 @@ GUNMOD("rail-mounted crossbow", 2, 500,  c_ltred, STEEL, WOOD,      2,  1,  2,  
 A kit to attach a pair of crossbow arms and a firing rail to\n\
 the barrel of a long firearm. It allows crossbow bolts to be fired.",
 mfb(IF_MODE_AUX)|mfb(IF_STR_RELOAD));
+
+GUNMOD("SW nullifier",   1,  2500, c_dkgray, STEEL, PLASTIC,  2,  2,  0,  0,  0,
+// ACC DAM NOI CLP REC BST NEWTYPE, PISTOL   SHOT  SMG   RIFLE
+   0,  0,  -99,0,  0,  0,  AT_NULL, true, true, true, true,
+      0, "\
+      An experimental next-generation silencer that analyzes and cancels gunshot\n\
+      sound waves without affecting the gun's performance.",
+      0);
+
+GUNMOD("pistol stock",  12, 1000, c_brown,  STEEL, WOOD,   5,  5,  0,  0, -1,
+// ACC DAM NOI CLP REC BST NEWTYPE, PISTOL   SHOT  SMG      RIFLE
+    5,  0,  0,  0, -5,  0, AT_NULL, true, false,   false,   false,
+      0, "\
+      A wooden stock with shock pad and mounting bracket for pistol grips.\n\
+      Greatly improves shooting, but adds considerable bulk and weight.",
+      0);
+
+GUNMOD("laser sight",  1, 2000, c_blue,  STEEL, GLASS,   1,  1,  0,  0, -1,
+// ACC DAM NOI CLP REC BST NEWTYPE, PISTOL   SHOT  SMG      RIFLE
+   10,  0,  0,  0, 0,  0,  AT_NULL, true, true, true, true,
+      0, "\
+      An under-barrel laser aiming module. Greatly increases accuracy by\n\
+      painting a weapon's line of fire, but extremely fragile.",
+      0);
+
+GUNMOD("hologram sight",  7, 500, c_brown,  STEEL, PLASTIC,   1,  1,  0,  0, -1,
+// ACC DAM NOI CLP REC BST NEWTYPE, PISTOL   SHOT  SMG      RIFLE
+    5,  0,  0,  0, 0,  0, AT_NULL,     true, true, true, true,
+      0, "\
+      A miniaturized holographic weapon site, small enough to attach to any gun.\n\
+      A small plutonium battery ensures continuous operation for years.",
+      0);
+
+GUNMOD("long-range scope",  1, 5000, c_blue,  STEEL, GLASS,   2,  5,  0,  0, -1,
+// ACC DAM NOI CLP REC BST NEWTYPE, PISTOL   SHOT  SMG      RIFLE
+   20,  0,  0,  0, 40,  0,    AT_NULL, true, true, true, true,
+      0, "\
+      A military-grade sniper scope with laser range-finder and adaptable mounting\n\
+      system. Greatly increases accuracy, but prevents effective rapid fire.",
+      0);
+
+GUNMOD("M26 MASS",  1, 1000, c_ltred,  STEEL, PLASTIC,   4,  11,  0,  0, -1,
+// ACC DAM NOI CLP REC BST NEWTYPE, PISTOL   SHOT  SMG      RIFLE
+   -2, 0,  0,  5,  0,  0,  AT_NULL, false,   false,   false,   true,
+      0, "\
+      A tactical underbarrel shotgun attachment for the M16/M4 and other military\n\
+      assault rifles and long guns. Holds 5 12-gauge shotgun shells or slugs.",
+      mfb(IF_MODE_AUX));
 
 // BOOKS
 // Try to keep colors consistant among types of books.
