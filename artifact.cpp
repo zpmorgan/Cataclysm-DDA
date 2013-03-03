@@ -419,7 +419,7 @@ void game::process_artifact(item *it, player *p, bool wielded)
   it_artifact_tool* tool = dynamic_cast<it_artifact_tool*>(it->type);
   effects = tool->effects_carried;
   if (wielded) {
-   for (unsigned int i = 0; i < tool->effects_wielded.size(); i++)
+   for (int i = 0; i < tool->effects_wielded.size(); i++)
     effects.push_back(tool->effects_wielded[i]);
   }
 // Recharge it if necessary
@@ -457,7 +457,7 @@ void game::process_artifact(item *it, player *p, bool wielded)
   }
  }
 
- for (unsigned int i = 0; i < effects.size(); i++) {
+ for (int i = 0; i < effects.size(); i++) {
   switch (effects[i]) {
   case AEP_STR_UP:
    p->str_cur += 4;
@@ -561,7 +561,7 @@ void game::process_artifact(item *it, player *p, bool wielded)
 void game::add_artifact_messages(std::vector<art_effect_passive> effects)
 {
  int net_str = 0, net_dex = 0, net_per = 0, net_int = 0, net_speed = 0;
- for (unsigned int i = 0; i < effects.size(); i++) {
+ for (int i = 0; i < effects.size(); i++) {
   switch (effects[i]) {
    case AEP_STR_UP:   net_str += 4; break;
    case AEP_DEX_UP:   net_dex += 4; break;

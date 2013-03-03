@@ -62,7 +62,7 @@ void game::wish()
    }
 
    if (search) {
-    for (unsigned int i = 0; i < itypes.size(); i++) {
+    for (int i = 0; i < itypes.size(); i++) {
      if (itypes[i]->name.find(pattern) != std::string::npos) {
       shift = i;
       a = 0;

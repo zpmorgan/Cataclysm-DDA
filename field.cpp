@@ -55,7 +55,7 @@ bool map::process_fields_in_submap(game *g, int gridn)
    case fd_acid:
     if (has_flag(swimmable, x, y))	// Dissipate faster in water
      cur->age += 20;
-    for (unsigned int i = 0; i < i_at(x, y).size(); i++) {
+    for (int i = 0; i < i_at(x, y).size(); i++) {
      item *melting = &(i_at(x, y)[i]);
      if (melting->made_of(LIQUID) || melting->made_of(VEGGY)   ||
          melting->made_of(FLESH)  || melting->made_of(POWDER)  ||
@@ -67,7 +67,7 @@ bool map::process_fields_in_submap(game *g, int gridn)
       if (melting->damage >= 5 ||
           (melting->made_of(PAPER) && melting->damage >= 3)) {
        cur->age += melting->volume();
-       for (unsigned int m = 0; m < i_at(x, y)[i].contents.size(); m++)
+       for (int m = 0; m < i_at(x, y)[i].contents.size(); m++)
         i_at(x, y).push_back( i_at(x, y)[i].contents[m] );
        i_at(x, y).erase(i_at(x, y).begin() + i);
        i--;
@@ -83,7 +83,7 @@ bool map::process_fields_in_submap(game *g, int gridn)
 // Consume items as fuel to help us grow/last longer.
     bool destroyed = false;
     int vol = 0, smoke = 0, consumed = 0;
-    for (unsigned int i = 0; i < i_at(x, y).size() && consumed < cur->density * 2; i++) {
+    for (int i = 0; i < i_at(x, y).size() && consumed < cur->density * 2; i++) {
      destroyed = false;
      vol = i_at(x, y)[i].volume();
      item *it = &(i_at(x, y)[i]);
@@ -169,7 +169,7 @@ bool map::process_fields_in_submap(game *g, int gridn)
      }
 
      if (destroyed) {
-      for (unsigned int m = 0; m < i_at(x, y)[i].contents.size(); m++)
+      for (int m = 0; m < i_at(x, y)[i].contents.size(); m++)
        i_at(x, y).push_back( i_at(x, y)[i].contents[m] );
       i_at(x, y).erase(i_at(x, y).begin() + i);
       i--;
@@ -538,7 +538,7 @@ bool map::process_fields_in_submap(game *g, int gridn)
 
    case fd_push_items: {
     std::vector<item> *it = &(i_at(x, y));
-    for (unsigned int i = 0; i < it->size(); i++) {
+    for (int i = 0; i < it->size(); i++) {
      if ((*it)[i].type->id != itm_rock || (*it)[i].bday >= int(g->turn) - 1)
       i++;
      else {
@@ -994,7 +994,7 @@ void map::mon_in_field(int x, int y, game *g, monster *z)
 
 bool vector_has(std::vector <item> vec, itype_id type)
 {
- for (unsigned int i = 0; i < vec.size(); i++) {
+ for (int i = 0; i < vec.size(); i++) {
   if (vec[i].type->id == type)
    return true;
  }
