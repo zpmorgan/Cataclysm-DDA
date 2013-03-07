@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     argc--; argv++;
    }
   }
-  else if (arg == "--export-itypes"){
+  else if (arg == "-x" || arg == "--export-itypes"){
    do_export_itypes=true;
    argc--; argv++;
   }

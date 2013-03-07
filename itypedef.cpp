@@ -4687,6 +4687,21 @@ itype_id default_ammo(ammotype guntype)
 
 #include "picojson.h"
 
+picojson::object extract_itype_props (game *g, int n){
+   itype *it = g->itypes[n];
+   picojson::object ret;
+   //convert stuff to picojson::value before stuffing it into ret.
+   //string, char, number
+#define RET_S(K,V) ret[K] = picojson::value(V);
+#define RET_C(K,V) ret[K] = picojson::value(std::string("")+V);
+#define RET_D(K,V) ret[K] = picojson::value((double)V);
+   //ret["name"] = picojson::value(it->name);
+   //ret["id"] = picojson::value((double)it->id);
+   RET_S("name", it->name);
+   RET_D("id", it->id);
+   RET_C("sym", it->sym);
+   return ret;
+}
 
 // serialize all itypes to JSON. print to STDOUT.
 void game::export_itypes(){
@@ -4696,8 +4711,8 @@ void game::export_itypes(){
    //picojson::array il = itypes_list.get<picojson::array>();
    picojson::array itypes_list;
    for (int i=0;i<itypes.size();i++) {
-      picojson::object iobj;
-      iobj["i"] = picojson::value((double)i);
+      picojson::object iobj = extract_itype_props (this, i);
+      //iobj["i"] = picojson::value((double)i);
       //itype_o["foo"] = std::string("bar");
       picojson::value j_iobj (iobj);
       itypes_list.push_back (j_iobj);
