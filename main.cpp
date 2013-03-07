@@ -22,20 +22,33 @@ int main(int argc, char *argv[])
 #ifdef ENABLE_LOGGING
   setupDebug();
 #endif
- int seed = time(NULL);
 
 //args: world seeding only.
+ int seed = time(NULL);
+ bool do_export_itypes = false;
  argc--; argv++;
  while (argc){
-  if(std::string(argv[0]) == "--seed"){
+  std::string arg (argv[0]);
+  if(arg == "--seed"){
    argc--; argv++;
    if(argc){
     seed = djb2_hash((unsigned char*)argv[0]);
     argc--; argv++;
    }
   }
-  else // ignore unknown args.
+  else if (arg == "--export-itypes"){
+   do_export_itypes=true;
    argc--; argv++;
+  }
+  else{ // ignore unknown args.
+   argc--; argv++;
+  }
+ }
+ if(do_export_itypes){
+    game *g = new game;
+    g->export_itypes();
+    return 0;
+    exit(0);
  }
 
 // ncurses stuff

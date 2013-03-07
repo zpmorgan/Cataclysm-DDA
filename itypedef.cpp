@@ -4683,3 +4683,31 @@ itype_id default_ammo(ammotype guntype)
  }
  return itm_null;
 }
+
+
+#include "picojson.h"
+
+
+// serialize all itypes to JSON. print to STDOUT.
+void game::export_itypes(){
+   //picojson::value everything (picojson::object_type, false);
+   //picojson::object everything_o = everything.get<picojson::object>();
+   //picojson::value itypes_list (picojson::array_type, false);
+   //picojson::array il = itypes_list.get<picojson::array>();
+   picojson::array itypes_list;
+   for (int i=0;i<itypes.size();i++) {
+      picojson::object iobj;
+      iobj["i"] = picojson::value((double)i);
+      //itype_o["foo"] = std::string("bar");
+      picojson::value j_iobj (iobj);
+      itypes_list.push_back (j_iobj);
+   }
+   picojson::value j_itypes_list (itypes_list);
+
+   picojson::object everything;
+   everything["itypes"] = j_itypes_list;
+   picojson::value j_everything(everything);
+   //j_everything.serialize(std::ostream_iterator<char>(std::cout));
+   std::cout << j_everything << std::endl;
+}
+
